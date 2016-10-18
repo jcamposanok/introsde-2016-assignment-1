@@ -1,4 +1,6 @@
 import controller.HealthProfileReader;
+import controller.HealthProfileWriter;
+import dao.PeopleList;
 import model.HealthProfile;
 import model.Person;
 import org.xml.sax.SAXException;
@@ -22,6 +24,7 @@ public class Assignment1 {
 
     public static void main(String[] args) throws ParserConfigurationException, JAXBException, SAXException, IOException, XPathExpressionException {
         HealthProfileReader reader = new HealthProfileReader();
+        HealthProfileWriter writer = new HealthProfileWriter("data/peopleOutput.xml");
 
         System.out.println();
         System.out.println("------------------------------------------");
@@ -49,6 +52,23 @@ public class Assignment1 {
             Person p = i.next();
             printPerson(p);
         }
+
+        System.out.println();
+        System.out.println("------------------------------------------");
+        System.out.println("4. Running instruction 2 based on Lab 4 (marshaling to XML - create 3 persons using java and marshal them to XML)");
+        PeopleList peopleList = new PeopleList();
+        peopleList.setData(peopleByWeight);
+        writer.marshal(peopleList, "data/peopleOutput.xml");
+
+        System.out.println();
+        System.out.println("------------------------------------------");
+        System.out.println("5. Running instruction 2 based on Lab 4 (unmarshaling from XML)");
+        PeopleList peopleListFromXml = reader.unmarshal();
+        List<Person> personsFromXml = peopleListFromXml.getData();
+        for (Person p : personsFromXml) {
+            printPerson(p);
+        }
+
     }
 
 }

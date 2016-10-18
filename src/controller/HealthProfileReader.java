@@ -16,42 +16,47 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
+
 public class HealthProfileReader {  	
-	// public static PeopleStore people = new PeopleStore();
 
-    static String xmlPath = "data/people.xml";
-    static Document doc;
-    static XPathFactory factory;
-    static XPath xpath;
+    private static String xmlPath;
+    private static Document doc;
+    private static XPathFactory factory;
+    private static XPath xpath;
 
-    static Unmarshaller um;
+    private static Unmarshaller unmarshaller;
+
+
+    // Class constructors
 
     public HealthProfileReader() throws ParserConfigurationException, SAXException,
+            IOException, JAXBException {
+        this("data/people.xml");
+    }
+    public HealthProfileReader(String sourceXmlFilePath) throws ParserConfigurationException, SAXException,
             IOException, JAXBException {
 
         DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
         domFactory.setNamespaceAware(true);
         DocumentBuilder builder = domFactory.newDocumentBuilder();
 
-        // System.out.println("Loading people.xml...");
-        this.doc = builder.parse(xmlPath);
+        this.xmlPath = sourceXmlFilePath;
+        this.doc = builder.parse(this.xmlPath);
         this.factory = XPathFactory.newInstance();
         this.xpath = this.factory.newXPath();
 
         JAXBContext jc = JAXBContext.newInstance(PeopleList.class);
-        this.um = jc.createUnmarshaller();
+        this.unmarshaller = jc.createUnmarshaller();
     }
 
 
-    // Based on Lab 3
-
-    // 1. Use xpath to implement methods like getWeight and getHeight
-    //    (getWeight(personID) returns weight of a given person, the same for getHeight)
+    // Use xpath to implement methods like getWeight and getHeight
+    // (getWeight(personID) returns weight of a given person, the same for getHeight)
 
     public String getWeight(String personID) throws XPathExpressionException {
         String searchExpr = "/people/person[@id='" + personID + "']";
@@ -98,7 +103,7 @@ public class HealthProfileReader {
     }
 
 
-    // 2. Make a function that prints all people in the list with detail
+    // A function that prints all people in the list with detail.
 
     public List<Person> listAllPeople() throws  XPathExpressionException {
         List<Person> results = new ArrayList<Person>();
@@ -114,7 +119,8 @@ public class HealthProfileReader {
     }
 
 
-    // 3. A function that accepts id as parameter and prints the HealthProfile of the person with that id
+    // A function that accepts id as parameter
+    // and prints the HealthProfile of the person with that id
 
     public HealthProfile getHealthProfileByPersonId(String personID) throws XPathExpressionException {
         String searchExpr = "/people/person[@id='" + personID + "']";
@@ -129,8 +135,8 @@ public class HealthProfileReader {
     }
 
 
-    // 4. A function which accepts a weight and an operator (=, > , <) as parameters
-    //    and prints people that fulfill that condition (i.e., >80Kg, =75Kg, etc.).
+    // A function which accepts a weight and an operator (=, > , <) as parameters
+    // and prints people that fulfill that condition (i.e., >80Kg, =75Kg, etc.).
 
     public List<Person> getPersonByWeight(double weight, String operator) throws XPathExpressionException {
         List<Person> results = new ArrayList<Person>();
@@ -148,4 +154,12 @@ public class HealthProfileReader {
     }
 
 
+    // Un-marshalling from XML using classes generated with JAXB XJC.
+
+    public PeopleList unmarshal() throws JAXBException {
+        return (PeopleList) this.unmarshaller.unmarshal(new File(this.xmlPath));
+    }
+    public PeopleList unmarshal(String inputXmlFilePath) throws JAXBException {
+        return (PeopleList) this.unmarshaller.unmarshal(new File(inputXmlFilePath));
+    }
 }

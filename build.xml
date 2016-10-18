@@ -56,7 +56,7 @@
     <property name="build.dir" value="build"/>
     <property name="src.dir" value="src"/>
     <property name="lib.dir" value="lib"/>
-    <!--property name="xjc.package" value="bookstore.generated" /-->
+    <property name="xjc.package" value="model.generated"/>
 
     <!-- =================================
               target: resolve downloads the dependencies to your lib folder
@@ -98,14 +98,12 @@
         <echo message="catalog.xml has been deleted"/>
     </target>
 
-    <!--    <target name="generate" depends="init">
-            <taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask" classpathref="lib.path.id">
-            </taskdef>
-            <xjc schema="catalog.xsd" destdir="${src.dir}" package="${xjc.package}" />
-        </target>-->
+    <target name="generate" depends="init">
+        <taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask" classpathref="lib.path.id"></taskdef>
+        <xjc schema="catalog.xsd" destdir="${src.dir}" package="${xjc.package}" />
+    </target>
 
-    <!--target name="compile" depends="init, generate"-->
-    <target name="compile" depends="init">
+    <target name="compile" depends="init, generate">
         <echo message="Compile target has been called"/>
         <javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="lib.path.id" includeAntRuntime="false">
         </javac>
