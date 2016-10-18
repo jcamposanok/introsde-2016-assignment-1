@@ -157,7 +157,7 @@ public class HealthProfileReader {
     // Un-marshalling from XML using classes generated with JAXB XJC.
 
     public PeopleList unmarshal() throws JAXBException {
-        return (PeopleList) this.unmarshaller.unmarshal(new File(this.xmlPath));
+        return this.unmarshal(this.xmlPath);
     }
     public PeopleList unmarshal(String inputXmlFilePath) throws JAXBException {
         return (PeopleList) this.unmarshaller.unmarshal(new File(inputXmlFilePath));

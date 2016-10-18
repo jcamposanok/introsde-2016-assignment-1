@@ -23,8 +23,8 @@ public class Assignment1 {
     }
 
     public static void main(String[] args) throws ParserConfigurationException, JAXBException, SAXException, IOException, XPathExpressionException {
-        HealthProfileReader reader = new HealthProfileReader();
-        HealthProfileWriter writer = new HealthProfileWriter("data/peopleOutput.xml");
+        HealthProfileReader reader = new HealthProfileReader("data/people.xml");
+        HealthProfileWriter writer = new HealthProfileWriter("data/peopleOutput.xml", "data/peopleOutput.json");
 
         System.out.println();
         System.out.println("------------------------------------------");
@@ -58,7 +58,7 @@ public class Assignment1 {
         System.out.println("4. Running instruction 2 based on Lab 4 (marshaling to XML - create 3 persons using java and marshal them to XML)");
         PeopleList peopleList = new PeopleList();
         peopleList.setData(peopleByWeight);
-        writer.marshal(peopleList, "data/peopleOutput.xml");
+        writer.marshal(peopleList);
 
         System.out.println();
         System.out.println("------------------------------------------");
@@ -69,6 +69,10 @@ public class Assignment1 {
             printPerson(p);
         }
 
+        System.out.println();
+        System.out.println("------------------------------------------");
+        System.out.println("6. Running instruction 3 based on Lab 4 (marshaling to JSON - create 3 persons using java and marshal them to JSON) - please print the content and save to .json file");
+        writer.marshalJson(peopleList);
     }
 
 }
