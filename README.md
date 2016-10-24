@@ -11,9 +11,9 @@ The following topics / technologies are covered in this lab assignment:
 
 ## Getting Started
 
-This will execute the tests scenarios described in the src/Assignment1.java class source code. The project has been divided into 3 layers for presentation (i.e. showing the tests results in stdout), the business logic and object-relational mapping features. The generated output and input XML/JSON files will be stored in the "data" directory.
+The project has been divided into 3 layers for presentation (i.e. showing the tests results in stdout), the business logic and object-relational mapping features. The generated output and input XML/JSON files will be stored in the "data" directory.
 
-To test the source code corresponding to the exercise cases, simply run the included Ant build.xml file. 
+To test the source code corresponding to the exercise cases, simply run the included Ant build.xml file. For a step by step explanation, review the tests scenarios described in the [src/Assignment1.java](src/Assignment1.java)  class source code. 
 
 ### Prerequisites
 
