@@ -11,7 +11,9 @@ The following topics / technologies are covered in this lab assignment:
 
 ## Getting Started
 
-To test the source code, simply run the Ant build.xml file. This will execute the tests scenarios described in the src/Assignment1.java class source code.
+This will execute the tests scenarios described in the src/Assignment1.java class source code. The project has been divided into 3 layers for presentation (i.e. showing the tests results in stdout), the business logic and object-relational mapping features. The generated output and input XML/JSON files will be stored in the "data" directory.
+
+To test the source code corresponding to the exercise cases, simply run the included Ant build.xml file. 
 
 ### Prerequisites
 
@@ -30,7 +32,7 @@ Run the execute.evaluation target inside the build.xml file (ant execute.evaluat
 
 * **José Carlos Camposano** - [jcamposanok](https://github.com/jcamposanok)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/jcamposanok/introsde-2016-assignment-1/contributors) who participated in this project.
 
 ## License
 
